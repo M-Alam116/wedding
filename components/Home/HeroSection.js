@@ -41,7 +41,7 @@ export default function HeroSection() {
           <option value="">Dinner</option>
         </select>
 
-        <button className="btn rounded-[15px] shadow-lg">Search</button>
+        <button className="btn bg-yellow-400 rounded-[15px] shadow-lg md:bg-primaryColor">Search</button>
       </form>
     </div>
   );
