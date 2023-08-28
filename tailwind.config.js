@@ -12,6 +12,7 @@ module.exports = {
         yellowColor: "#ffdf66",
         primaryColor: "#E66880",
         textColor: "rgba(0, 0, 0, 0.51)",
+        grayBg: "rgba(217, 217, 217, 0.18)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

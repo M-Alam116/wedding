@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function Cities() {
   return (
-    <div className="container pt-[50px] pb-[20px] px[5px]">
+    <div className="container py-[50px] px[5px]">
       <div>
         <h1 className="heading text-center">CITIES AVAILABLE</h1>
       </div>
