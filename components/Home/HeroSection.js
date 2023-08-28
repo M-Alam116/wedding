@@ -2,10 +2,10 @@ export default function HeroSection() {
   return (
     <div className="bgGradient py-[7rem]">
       <div className="flex flex-col items-center justify-center pb-[3rem]">
-        <h1 className="secondaryFont text-[40px] font-[700] text-white">
+        <h1 className="secondaryFont text-[40px] font-[700] text-white text-center">
           DA WEDDING WHISPER
         </h1>
-        <h2 className="text-white font-[600] text-[20px]">
+        <h2 className="text-white font-[600] text-[20px] text-center">
           ELEVATING YOUR SPECIAL DAY
         </h2>
       </div>
@@ -41,7 +41,7 @@ export default function HeroSection() {
           <option value="">Dinner</option>
         </select>
 
-        <button className="btn rounded-[15px]">Search</button>
+        <button className="btn rounded-[15px] shadow-lg">Search</button>
       </form>
     </div>
   );
