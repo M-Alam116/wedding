@@ -1,27 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* @layer base {
+  section {
+    @apply py-[75px];
   }
+} */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Poppins";
+}
+
+.secondaryFont {
+  font-family: "Playfair Display";
+}
+
+.bgGradient {
+  background-image: linear-gradient(to right, #E66880 50%, #ffdf66 100%);
+}
+
+@layer components {
+  .container {
+    @apply max-w-full w-[1440px] mx-auto;
+  }
+
+  .btn {
+    @apply bg-primaryColor py-[10px] px-[35px] text-white font-[500];
+  }
+
+  .heading {
+    @apply text-[64px] font-[600] text-primaryColor;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    @apply w-full;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .heading {
+    @apply text-[40px];
+  }
 }
