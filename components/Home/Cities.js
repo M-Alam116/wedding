@@ -6,7 +6,7 @@ export default function Cities() {
         <h1 className="heading text-center">CITIES AVAILABLE</h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[50px]">
         <div className="flex flex-col justify-end items-center">
           <Image src="/images/islamabad.png" width={200} height={200} alt="" />
           <h2 className="text-[18px] font-[500] text-center mt-[15px]">ISLAMABAD</h2>

@@ -7,7 +7,7 @@ export default function Working() {
         <h1 className="heading text-center">HOW IT WORKS</h1>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-[30px] mt-[50px]">
+      <div className="flex flex-wrap justify-center gap-[80px] lg:gap-[30px] mt-[50px]">
         <div className="relative z-[-999] flex flex-col justify-center items-center border-[2px] border-gray-300 shadow-xl py-[40px] px-[10px] w-[18rem] rounded-[10px]">
           <Image src="/images/search.png" width={50} height={50} alt="" />
           <h2 className="text-[16px] font-[700] my-[10px]">Search</h2>
