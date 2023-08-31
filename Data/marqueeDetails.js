@@ -1,10 +1,10 @@
-const marqueeDetails = [
+export const marqueeDetails = [
   {
     id: 1,
     title: "Peshawar Gathering Hall",
     location:
       "Opp Gulbahar police station near Al Mansoor Hotel GT road, Pehsawar",
-    capacity: "350-800 persons",
+    capacity: "350-800",
     image: "/images/peshawarGatheringhall.png",
     totalPrice: "PKR.110000",
     pricePerHead: "PKR.499-850",
@@ -15,7 +15,7 @@ const marqueeDetails = [
     title: "Peshawar Gathering Hall",
     location:
       "Opp Gulbahar police station near Al Mansoor Hotel GT road, Pehsawar",
-    capacity: "350-800 persons",
+    capacity: "350-800",
     image: "/images/peshawarGatheringhall.png",
     totalPrice: "PKR.110000",
     pricePerHead: "PKR.499-850",
@@ -26,7 +26,7 @@ const marqueeDetails = [
     title: "Peshawar Gathering Hall",
     location:
       "Opp Gulbahar police station near Al Mansoor Hotel GT road, Pehsawar",
-    capacity: "350-800 persons",
+    capacity: "350-800",
     image: "/images/peshawarGatheringhall.png",
     totalPrice: "PKR.110000",
     pricePerHead: "PKR.499-850",

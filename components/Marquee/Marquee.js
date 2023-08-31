@@ -1,5 +1,6 @@
 import Card from "./Card";
 import Filter from "./Filter";
+import { marqueeDetails } from "../../Data/marqueeDetails";
 
 export default function Marquee() {
   return (
@@ -11,12 +12,17 @@ export default function Marquee() {
       </div>
 
       <div className="px-[10px] py-[50px] flex flex-col lg:flex-row gap-[20px]">
-        <div className="w-full lg:w-[30%]">
+        <div className="w-full lg:w-[25%] relative z-[-1]">
           <Filter />
         </div>
-        <div className="w-full lg:w-[70%]">
-          <Card />
+        <div className="w-full lg:w-[72%]">
+          {marqueeDetails.map((marqueeData) => (
+            <Card key={marqueeData.id} marqueeData={marqueeData} />
+          ))}
         </div>
+      </div>
+      <div className="flex justify-center items-center md:mr-[2rem] mb-[2rem] md:justify-end md:items-end">
+        <button className="btn">VIEW MORE</button>
       </div>
     </div>
   );

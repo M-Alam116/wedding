@@ -1,4 +1,4 @@
-// import * as React from "react";
+import * as React from "react";
 import Switch from "@mui/material/Switch";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -10,7 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { RiArrowDownSLine } from "react-icons/ri";
 export default function Filter() {
   return (
-    <div className="relative z-[-1]">
+    <div className="flex flex-col gap-[20px]">
       {/* ========= range ======== */}
       <div className="flex justify-between items-center">
         <label htmlFor="range" className="text-[16px] font-[500]">
