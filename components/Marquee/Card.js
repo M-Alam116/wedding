@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GrInherit, GrLocation } from "react-icons/gr";
+import { GrLocation } from "react-icons/gr";
 import { PiPersonFill } from "react-icons/pi";
 import Stack from "@mui/material/Stack";
 import Rating from "@mui/material/Rating";
