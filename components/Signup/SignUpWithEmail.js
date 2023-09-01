@@ -1,12 +1,19 @@
 import Link from "next/link";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 export default function SignUpWithEmail() {
   return (
     <div className="container">
       {/* ======== Top Gradient ========== */}
-      <div className="flex items-center justify-center bgGradient w-full h-[10rem] md:h-[15rem]">
+      <div className="flex flex-col items-center justify-center bgGradient w-full h-[10rem] md:h-[15rem]">
         <h1 className="secondaryFont heading text-[35px] font-[700] text-white text-center">
           SIGN UP TO DA WEDDING WHISPER
         </h1>
+        <Link href="/">
+          <div className="flex items-center gap-[10px] cursor-pointer">
+            <BsFillArrowLeftCircleFill className="w-7 h-7 mx-auto mt-[10px]" />
+            <p className="text-[18px] font-[600] mt-[7px]">Home</p>
+          </div>
+        </Link>
       </div>
 
       {/*=============== Registration form ========== */}

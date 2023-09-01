@@ -1,13 +1,20 @@
 import Link from "next/link";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 export default function Booking() {
   return (
     <div className="container">
       <div className="grid md:grid-cols-4">
         {/* ======= left gradient ========== */}
-        <div className="col-span-1 w-full bgGradient h-[15rem] md:h-full flex justify-center items-center">
+        <div className="col-span-1 w-full bgGradient h-[15rem] md:h-full flex flex-col justify-center items-center">
           <h1 className="secondaryFont heading text-[30px] font-[700] text-white text-center">
             DA WEDDING WHISPER
           </h1>
+          <Link href="/">
+          <div className="flex items-center gap-[10px] cursor-pointer">
+            <BsFillArrowLeftCircleFill className="w-7 h-7 mx-auto mt-[10px]" />
+            <p className="text-[18px] font-[600] mt-[7px]">Home</p>
+          </div>
+        </Link>
         </div>
 
         {/* ============ right form ========= */}

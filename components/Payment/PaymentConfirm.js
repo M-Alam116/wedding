@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 export default function PaymentConfirm() {
   return (
     <div className="container">
       {/* ======== Top Gradient ========== */}
-      <div className="flex items-center justify-center bgGradient w-full h-[15rem] md:h-[20rem]">
+      <div className="flex flex-col items-center justify-center bgGradient w-full h-[15rem] md:h-[20rem]">
         <h1 className="secondaryFont heading text-[40px] font-[700] text-white text-center">
           PAYMENT
         </h1>
+        <Link href="/">
+          <div className="flex items-center gap-[10px] cursor-pointer">
+            <BsFillArrowLeftCircleFill className="w-7 h-7 mx-auto mt-[10px]" />
+            <p className="text-[18px] font-[600] mt-[7px]">Home</p>
+          </div>
+        </Link>
       </div>
 
       {/* ========= payment confirm ========== */}
