@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FiArrowLeftCircle } from "react-icons/fi";
 export default function SignUpWithEmail() {
   return (
     <div className="container">

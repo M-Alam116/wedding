@@ -1,3 +1,4 @@
+import { marqueeDetails } from "../../Data/marqueeDetails";
 import { HiLocationMarker } from "react-icons/hi";
 import { PiPersonFill } from "react-icons/pi";
 import { ImPriceTags } from "react-icons/im";
@@ -7,13 +8,13 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { RiArrowDownSLine } from "react-icons/ri";
-export default function MarqueeDetail() {
+export default function MarqueeDetailPage({ marquee }) {
   return (
     <div className="container">
       {/* ========= Top Gradient =========== */}
       <div className="flex items-center justify-center bgGradient w-full h-[15rem] md:h-[20rem]">
         <h1 className="secondaryFont heading text-[40px] font-[700] text-white text-center">
-          PESHAWAR GATHERING HALL
+          {marquee.title}
         </h1>
       </div>
 
@@ -25,41 +26,31 @@ export default function MarqueeDetail() {
             <h1 className="text-textColor font-[700] text-[22px]">
               DESCRIPTION
             </h1>
-            <h2 className="font-[700] text-[18px]">Peshawar Gathering Hall</h2>
+            <h2 className="font-[700] text-[18px]">{marquee.title}</h2>
             <h3 className="text-[16px] font-[500] flex gap-[10px]">
               <HiLocationMarker className="w-10 h-10 md:w-7 md:h-6" />
-              <span>
-                Opp Gulbahar police station near Al Mansoor Hotel GT road,
-                Peshawar
-              </span>
+              <span>{marquee.location}</span>
             </h3>
             <span className="text-[16px] text-textColor flex gap-[10px]">
               <ImPriceTags className="w-6 h-6" />
-              <span>PKR. 110000</span>
+              <span>{marquee.totalPrice}</span>
             </span>
             <span className="text-[16px] text-textColor flex gap-[10px]">
               <PiPersonFill className="w-6 h-6" />
-              <span>Capacity: 800 persons</span>
+              <span>Capacity: {marquee.capacity}</span>
             </span>
             <ul className="text-[16px] font-[500]">
               <span className="text-[16px] font-[600]">On Menu Booking:</span>
-              <li className="">i) Guest&gt;350, hall will be free</li>
-              <li className="">
-                ii) Guest&lt;350, hall charges will be 40000Rs
-              </li>
-              <li className="">iii) Guest&lt;200 then full hall charges.</li>
-              <p className="">
-                Discount on working days (Mon to Thursday) Peshawar Gathering
-                hall provides cooperative staff, tasty food, two halls separate
-                for male and females, ladies and gents waiters, full theme
-                decoration, vast parking. We are located on GT road in a very
-                comfortable location for customers.
-              </p>
+              <ul>
+                {marquee.description.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
             </ul>
           </div>
           <div className="col-span-1 flex justify-center md:justify-end w-full h-[250px]">
             <Image
-              src="/images/peshawarGatheringhall2.png"
+              src={marquee.image2}
               width={500}
               height={200}
               alt=""
@@ -71,16 +62,9 @@ export default function MarqueeDetail() {
         <div className="mt-[40px] ml-[20px]">
           <h2 className="text-[18px] font-[700]">Features List</h2>
           <ul className="list-decimal text-[16px] font-[500]">
-            <li>Dj and sound system</li>
-            <li>Theme Decoration</li>
-            <li>Round and Square Tables</li>
-            <li>Male and Females Waiters</li>
-            <li>Female DJ</li>
-            <li>Backup generator</li>
-            <li>Car Parking</li>
-            <li>Heater & AC</li>
-            <li>Nikah Room</li>
-            <li>Multimedia and Screens etc</li>
+            {marquee.features.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
           </ul>
         </div>
 
@@ -352,4 +336,15 @@ export default function MarqueeDetail() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps({ params }) {
+  const marqueeId = parseInt(params.id);
+  const marquee = marqueeDetails.find((marquee) => marquee.id === marqueeId);
+
+  return {
+    props: {
+      marquee,
+    },
+  };
 }

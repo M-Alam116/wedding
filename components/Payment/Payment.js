@@ -25,8 +25,8 @@ export default function Payment() {
         <div className="flex mx-auto mt-[70px] w-[90%] md:w-[500px]">
           <Image
             src="/images/credit.png"
-            width={innerWidth}
-            height={innerHeight}
+            width={500}
+            height={300}
             alt=""
           />
         </div>

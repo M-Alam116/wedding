@@ -3,14 +3,15 @@ import { GrLocation } from "react-icons/gr";
 import { PiPersonFill } from "react-icons/pi";
 import Stack from "@mui/material/Stack";
 import Rating from "@mui/material/Rating";
+import Link from "next/link";
 export default function Card({ marqueeData }) {
-  const { title, location, capacity, image, totalPrice, pricePerHead } =
+  const { title, location, capacity, image, totalPrice, pricePerHead, id } =
     marqueeData;
-
+    
   return (
     <div className="flex flex-col gap-[20px] md:flex-row w-full bg-gray-100 shadow-xl mt-[20px]">
       <div className="flex justify-center md:justify-start w-full md:w-[300px]">
-        <Image src={image} width={innerWidth} height={innerHeight} alt="" />
+        <Image src={image} width={300} height={500} alt="" />
       </div>
       <div className="flex flex-col justify-center gap-[10px] p-[10px]">
         <h1 className="text-[20px] font-[600] text-center">{title}</h1>
@@ -37,8 +38,9 @@ export default function Card({ marqueeData }) {
             />
           </Stack>
         </div>
-
-        <button className="btn md:w-fit mt-[10px]">Book Now</button>
+        <Link href={`/marquee/${id}`}>
+          <button className="btn md:w-fit mt-[10px]">Book Now</button>
+        </Link>
       </div>
     </div>
   );

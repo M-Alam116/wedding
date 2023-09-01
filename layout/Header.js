@@ -13,7 +13,6 @@ export default function Header() {
     <header className="sticky top-0 shadow-md" ref={headerRef}>
       <div className="container bgGradient text-[18px] text-[white] font-[500] py-[10px] px-5">
         <div className="flex justify-between items-center">
-          
           {/* ========== logo ============ */}
           <div>
             <Link href="/">
@@ -27,6 +26,9 @@ export default function Header() {
               <ImCross className="block absolute top-5 left-5 md:hidden" />
               <Link href="/">
                 <li>Home</li>
+              </Link>
+              <Link href="/marquee">
+                <li>Find Hall</li>
               </Link>
               <Link href="/about">
                 <li>About US</li>
