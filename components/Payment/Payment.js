@@ -1,6 +1,7 @@
 import { AiFillCreditCard } from "react-icons/ai";
 import { FaCcPaypal, FaCcApplePay } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 export default function Payment() {
   return (
     <div className="container">
@@ -23,12 +24,7 @@ export default function Payment() {
         </div>
 
         <div className="flex mx-auto mt-[70px] w-[90%] md:w-[500px]">
-          <Image
-            src="/images/credit.png"
-            width={500}
-            height={300}
-            alt=""
-          />
+          <Image src="/images/credit.png" width={500} height={300} alt="" />
         </div>
 
         <form className="mt-[50px] flex flex-col justify-center items-center gap-[20px]">
@@ -80,7 +76,9 @@ export default function Payment() {
             />
           </div>
           <div className="">
-            <button className="btn mt-[20px]">PAY NOW</button>
+            <Link href="/payment/payment-confirm">
+              <button className="btn mt-[20px]">PAY NOW</button>
+            </Link>
           </div>
         </form>
       </div>

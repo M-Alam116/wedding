@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Rating from "@mui/material/Rating";
 import Link from "next/link";
 export default function Card({ marqueeData }) {
-  const { title, location, capacity, image, totalPrice, pricePerHead, id } =
+  const { title, location, capacity, image, totalPrice, pricePerHead, rating, id } =
     marqueeData;
     
   return (
@@ -33,8 +33,9 @@ export default function Card({ marqueeData }) {
             <Rating
               className="text-primaryColor"
               name="half-rating"
-              defaultValue={2.5}
+              defaultValue={rating}
               precision={0.5}
+              readOnly
             />
           </Stack>
         </div>

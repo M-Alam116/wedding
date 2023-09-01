@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Booking() {
   return (
     <div className="container">
@@ -109,7 +110,9 @@ export default function Booking() {
           </div>
 
           <div className="mt-[30px]">
-            <button className="btn">NEXT</button>
+            <Link href="/booking/booking-confirm">
+              <button className="btn">NEXT</button>
+            </Link>
           </div>
         </form>
       </div>

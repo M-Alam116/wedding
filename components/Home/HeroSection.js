@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <div className="bgGradient py-[7rem]">
+    <div className="container bgGradient py-[7rem]">
       <div className="flex flex-col items-center justify-center pb-[3rem]">
         <h1 className="secondaryFont text-[40px] font-[700] text-white text-center">
           DA WEDDING WHISPER

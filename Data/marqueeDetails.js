@@ -9,6 +9,7 @@ export const marqueeDetails = [
     image2: "/images/peshawarGatheringhall2.png",
     totalPrice: "PKR.110000",
     pricePerHead: "PKR.499-850",
+    rating: 5,
     description: [
       "1) Guest>350, hall will be free",
       "2) Guest<350, hall charges will be 40000Rs",
@@ -39,6 +40,7 @@ export const marqueeDetails = [
     image2: "/images/peshawarGatheringhall2.png",
     totalPrice: "PKR.110000",
     pricePerHead: "PKR.499-850",
+    rating: 4.5,
     description: [
       "1) Guest>350, hall will be free",
       "2) Guest<350, hall charges will be 40000Rs",
@@ -68,6 +70,7 @@ export const marqueeDetails = [
     image2: "/images/peshawarGatheringhall2.png",
     totalPrice: "PKR.110000",
     pricePerHead: "PKR.499-850",
+    rating: 4,
     description: [
       "1) Guest>350, hall will be free",
       "2) Guest<350, hall charges will be 40000Rs",

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 export default function BookingConfirm() {
   return (
     <div className="container">
@@ -142,7 +143,9 @@ export default function BookingConfirm() {
               </div>
 
               <div className="flex justify-center items-center mt-[40px]">
-                <button className="btn">PLACE BOOKING</button>
+                <Link href="/payment">
+                  <button className="btn">PLACE BOOKING</button>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,9 +1,13 @@
 import Contact from "@/components/Contact/Contact";
-
+import { Fragment } from "react";
+import Head from "next/head";
 export default function ContactPage() {
   return (
-    <div className="container">
+    <Fragment>
+      <Head>
+        <title>Contact</title>
+      </Head>
       <Contact />
-    </div>
+    </Fragment>
   );
 }

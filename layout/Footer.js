@@ -68,13 +68,13 @@ export default function Footer() {
         <Link href="/">
           <AiFillTwitterCircle className="w-10 h-10 cursor-pointer" />
         </Link>
-        <Link href="/">
+        <Link href="https://www.facebook.com/profile.php?id=100091511314699&mibextid=ZbWKwL" target="_blank">
           <BsFacebook className="w-9 h-9 cursor-pointer" />
         </Link>
-        <Link href="/">
+        <Link href="https://instagram.com/daweddingwhisper?igshid=YmMyMTA2M2Y=" target="_blank">
           <BsInstagram className="w-8 h-8 cursor-pointer" />
         </Link>
-        <Link href="/">
+        <Link href="https://www.linkedin.com/company/da-wedding-whisper?originalSubdomain=pk" target="_blank">
           <BsLinkedin className="w-8 h-8 cursor-pointer" />
         </Link>
       </div>

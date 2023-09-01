@@ -1,9 +1,13 @@
 import About from "@/components/About/About";
-
+import { Fragment } from "react";
+import Head from "next/head";
 export default function AboutPage() {
   return (
-    <div className="container">
+    <Fragment>
+      <Head>
+        <title>About Us</title>
+      </Head>
       <About />
-    </div>
+    </Fragment>
   );
 }

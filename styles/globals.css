@@ -29,6 +29,11 @@ body {
   background-image: linear-gradient(to right, #e66880 50%, #ffdf66 100%);
 }
 
+.active {
+  color: rgb(97, 94, 94);
+  border-bottom: solid 3px rgb(230, 230, 29); 
+}
+
 @layer components {
   .container {
     @apply max-w-full w-[1440px] mx-auto;
@@ -77,6 +82,16 @@ body {
     justify-content: center;
     align-items: center;
     line-height: 30px;
+    animation: animate 0.7s;
+  }
+
+  @keyframes animate {
+    0% {
+      right: -15rem;
+    }
+    100% {
+      right: 0;
+    }
   }
 
   .show__menu {

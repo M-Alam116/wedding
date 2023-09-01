@@ -1,9 +1,13 @@
 import Booking from "@/components/Booking/Booking";
-
+import { Fragment } from "react";
+import Head from "next/head";
 export default function BookingPage() {
   return (
-    <div>
+    <Fragment>
+      <Head>
+        <title>Booking Details</title>
+      </Head>
       <Booking />
-    </div>
+    </Fragment>
   );
 }
