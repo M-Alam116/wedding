@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-export default function Layout({ children }) {
+export default function Layout({ children, showHeaderAndFooter = true }) {
   return (
     <Fragment>
-      <Header />
+      {showHeaderAndFooter && <Header />}
       <main>{children}</main>
-      <Footer />
+      {showHeaderAndFooter && <Footer />}
     </Fragment>
   );
 }
