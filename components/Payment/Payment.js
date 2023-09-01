@@ -30,12 +30,12 @@ export default function Payment() {
           <FaCcPaypal className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] cursor-pointer" />
         </div>
 
-        <div className="flex mx-auto mt-[70px] w-[90%] md:w-[500px]">
+        <div className="flex justify-center items-center mx-auto mt-[70px] w-[90%] md:w-[500px]">
           <Image src="/images/credit.png" width={500} height={300} alt="" />
         </div>
 
         <form className="mt-[50px] flex flex-col justify-center items-center gap-[20px]">
-          <div className="w-full md:w-[500px] flex items-center justify-between gap-[30px]">
+          <div className="w-full md:w-[500px] flex flex-col md:flex-row items-center justify-between gap-[30px]">
             <label htmlFor="" className="text-[16px] font-[600]">
               CREDIT HOLDER:
             </label>
@@ -47,7 +47,7 @@ export default function Payment() {
             />
           </div>
 
-          <div className="w-full md:w-[500px] flex items-center justify-between gap-[30px]">
+          <div className="w-full md:w-[500px] flex flex-col md:flex-row items-center justify-between gap-[30px]">
             <label htmlFor="" className="text-[16px] font-[600]">
               CREDIT NUMBER:
             </label>
@@ -59,7 +59,7 @@ export default function Payment() {
             />
           </div>
 
-          <div className="w-full md:w-[500px] flex items-center justify-between gap-[30px]">
+          <div className="w-full md:w-[500px] flex flex-col md:flex-row items-center justify-between gap-[30px]">
             <label htmlFor="" className="text-[16px] font-[600]">
               EXPIRE DATE:
             </label>
@@ -71,7 +71,7 @@ export default function Payment() {
             />
           </div>
 
-          <div className="w-full md:w-[500px] flex items-center justify-between gap-[30px]">
+          <div className="w-full md:w-[500px] flex flex-col md:flex-row items-center justify-between gap-[30px]">
             <label htmlFor="" className="text-[16px] font-[600]">
               CVV:
             </label>
