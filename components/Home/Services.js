@@ -1,9 +1,9 @@
 import Image from "next/image";
 export default function Services() {
   return (
-    <div className="container py-[50px] px-[5px]">
+    <div className="container py-[50px] px-[5px]" id="services">
       <div>
-        <h1 className="heading text-center">OUR SERVICES</h1>
+        <h1 className="heading text-center mt-[20px]">WHAT WE DO</h1>
       </div>
 
       <div className="flex flex-wrap gap-[50px] justify-center mt-[40px]">

@@ -29,9 +29,31 @@ body {
   background-image: linear-gradient(to right, #e66880 50%, #ffdf66 100%);
 }
 
+.hero-bg {
+  background-image: url("/images/hero-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: auto;
+}
+
+.testimonial {
+  background-image: url("/images/testimonail.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: auto;
+}
+
 .active {
-  color: rgb(97, 94, 94);
-  border-bottom: solid 3px rgb(230, 230, 29); 
+  color: rgba(230, 104, 128, 1);
+  border-bottom: solid 3px rgba(238, 123, 102, 1);
+}
+
+.hamburger {
+  display: none
 }
 
 @layer components {
@@ -40,7 +62,7 @@ body {
   }
 
   .btn {
-    @apply bg-primaryColor py-[10px] px-[35px] text-white font-[500];
+    @apply bg-primaryColor py-[10px] px-[30px] text-white font-[500];
   }
 
   .heading {
@@ -54,7 +76,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 860px) {
   .heading {
     @apply text-[25px];
   }
@@ -70,13 +92,17 @@ body {
     display: none;
   }
 
+  .hamburger {
+    display: block;
+  }
+
   .menu {
     width: 15rem;
     height: 100%;
     position: absolute;
     top: 0;
     right: 0;
-    background: #E66880;
+    background: white;
     z-index: 200;
     flex-direction: column;
     justify-content: center;

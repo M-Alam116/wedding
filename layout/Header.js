@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 shadow-md z-[999999]" ref={headerRef}>
-      <div className="container bgGradient text-[18px] text-[white] font-[500] py-[10px] px-5">
+      <div className="container bg-white text-[18px] text-black font-[500] py-[5px] px-5">
         <div className="flex justify-between items-center">
           {/* ========== logo ============ */}
           <div>
@@ -29,34 +29,53 @@ export default function Header() {
               <Link href="/">
                 <li
                   className={
-                    router.pathname === "/" ? "active" : "hover:text-gray-600"
+                    router.pathname === "/"
+                      ? "active"
+                      : "hover:text-primaryColor"
                   }
                 >
                   Home
                 </li>
               </Link>
-              <Link href="/marquee">
+              <Link href="/#services">
                 <li
                   className={
-                    router.pathname === "/marquee" ? "active" : "hover:text-gray-600"
+                    router.pathname === "/#services"
+                      ? "active"
+                      : "hover:text-primaryColor"
                   }
                 >
-                  Find Hall
+                  Services
                 </li>
               </Link>
               <Link href="/about">
                 <li
                   className={
-                    router.pathname === "/about" ? "active" : "hover:text-gray-600"
+                    router.pathname === "/about"
+                      ? "active"
+                      : "hover:text-primaryColor"
                   }
                 >
                   About US
                 </li>
               </Link>
-              <Link href="contact">
+              <Link href="/blog">
                 <li
                   className={
-                    router.pathname === "/contact" ? "active" : "hover:text-gray-600"
+                    router.pathname === "/blog"
+                      ? "active"
+                      : "hover:text-primaryColor"
+                  }
+                >
+                  Blog
+                </li>
+              </Link>
+              <Link href="/contact">
+                <li
+                  className={
+                    router.pathname === "/contact"
+                      ? "active"
+                      : "hover:text-primaryColor"
                   }
                 >
                   Contact Us
@@ -66,16 +85,20 @@ export default function Header() {
           </div>
 
           {/* =========== right header =========== */}
-          <div className="flex items-center gap-[30px]">
+          <div className="flex items-center gap-[10px] sm:gap-[30px]">
             <Link href="/login">
-              <button className="hover:text-gray-600">LogIn</button>
+              <button className="btn bg-transparent text-black border-[2px] font-[500] text-[15px] py-[8px] border-primaryColor rounded-[6px]">
+                Log In
+              </button>
             </Link>
 
             <Link href="/signup">
-              <button className="hover:text-gray-600">SignUp</button>
+              <button className="btn font-[500] text-[15px] rounded-[6px] hidden sm:inline">
+                Register
+              </button>
             </Link>
 
-            <span className="block md:hidden" onClick={toggleMenu}>
+            <span className="hamburger" onClick={toggleMenu}>
               <BiMenu className="w-8 h-8 cursor-pointer" />
             </span>
           </div>
