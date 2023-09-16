@@ -57,6 +57,7 @@ body {
   display: none
 }
 
+
 @layer components {
   .container {
     @apply max-w-full w-[1440px] mx-auto;

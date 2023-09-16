@@ -9,15 +9,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellowColor: "#ffdf66",
         primaryColor: "#E66880",
-        textColor: "rgba(0, 0, 0, 0.51)",
-        grayBg: "rgba(217, 217, 217, 0.18)",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      backgroundColor: {
+        secondaryBg: "rgba(248, 248, 248, 1)",
       },
     },
   },

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsInstagram, BsWhatsapp } from "react-icons/bs";
-import { AiFillTwitterCircle } from "react-icons/ai";
 import { LuFacebook } from "react-icons/lu";
 import { PiLinkedinLogoBold } from "react-icons/pi";
 export default function Footer() {
@@ -9,7 +8,7 @@ export default function Footer() {
 
   return (
     <div className="container bg-white py-[75px] px-[10px] md:px-[20px]">
-      <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-[20px] pt-[20px] pb-[10px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-[20px] pt-[20px] pb-[10px]">
         {/* ============= main links ============ */}
         <div className="flex flex-col justify-center sm:flex-row sm:justify-evenly gap-[20px] sm:gap-[7rem]">
           <Link href="/">
@@ -23,6 +22,14 @@ export default function Footer() {
             </li>
           </Link>
         </div>
+
+        {/* ======== logo ========= */}
+        <div className="hidden md:block">
+          <Link href="/">
+            <Image src="/images/logo.png" width={80} height={80} alt="" />
+          </Link>
+        </div>
+
         <div className="flex flex-col justify-center sm:flex-row sm:justify-evenly gap-[20px] sm:gap-[7rem]">
           <Link href="/about">
             <li className="text-[15px] font-[700] list-none text-center">

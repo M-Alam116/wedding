@@ -2,85 +2,23 @@ import Image from "next/image";
 export default function About() {
   return (
     <div className="container">
-      {/* ========= Top Gradient ========== */}
-      <div className="flex items-center justify-center bgGradient w-full h-[15rem] md:h-[20rem]">
-        <h1 className="secondaryFont heading text-[40px] font-[700] text-white text-center">
-          WELCOME TO OUR SITE
-        </h1>
-      </div>
-
-      {/* =========== About Info ============ */}
-      <div className="flex items-center flex-col-reverse md:flex-row justify-between gap-[50px] px-[10px] md:px-[30px] py-[50px]">
-        <div className="w-full md:w-1/2 flex flex-col items-center">
-          <p className="text-[18px] font-[500] text-center">
-            At Da Wedding Whisper, we strive to create a heartfelt planning
-            experience, ensuring your wedding day is filled with love and joy.
-            With a calm, loving, and professional approach, we guide you through
-            the entire process with care and dedication
-          </p>
-          <button className="btn rounded-sm mt-[20px]">Read More</button>
-        </div>
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-          <Image src="/images/aboutpic.png" width={300} height={300} alt="" />
-        </div>
-      </div>
-
-      {/* ========== About Details ========== */}
-      <div className="flex flex-col-reverse md:flex-row justify-center gap-[20px] px-[10px] py-[50px] bg-grayBg">
-        <div className="w-full md:w-1/2 flex justify-center items-center">
-          <Image src="/images/event.png" width={300} height={200} alt="" />
-        </div>
-        <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
-          <span className="w-[3rem] h-[3rem] text-center p-[10px] text-white bg-primaryColor text-[20px] font-[700] rounded-full">
-            01
-          </span>
-          <h2 className="text-[18px] font-[600] my-[10px]">Event Planning</h2>
-          <p className="text-textColor text-[16px] font-[500] text-center md:text-left">
-            We are dedicated to crafting a comprehensive design plan for your
-            wedding, encompassing everything from attire and stationery to
-            personalized details, florals, and rentals. Our aim is to create a
-            harmonious and cohesive look for your special event.
+      {/* =========== Top ========= */}
+      <div className="grid grid-cols-1 md:grid-cols-2 bg-secondaryBg py-[100px]">
+        <div className="w-full flex flex-col justify-center items-center gap-[15px] px-[10px] sm:px-[3rem]">
+          <h1 className="text-[30px] sm:text-[35px] leading-[40px] sm:leading-[45px] font-[500] text-center sm:text-left w-full lg:w-[70%]">
+            Say <span className="font-[700] text-primaryColor">Goodbye</span> to
+            Worries,
+            <span className="font-[700] text-primaryColor"> Embrace</span>{" "}
+            Precious Moments
+          </h1>
+          <p className="text-[16px] font-[500] text-center sm:text-left text-black opacity-80 w-full lg:w-[70%]">
+            Consequuntur magni dolores eos qui ratione voluptatem sequi
+            nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+            amet, consectetur, adipisci velit, sed quia non numquam.
           </p>
         </div>
-      </div>
-
-      <div className="flex flex-col md:flex-row justify-center gap-[20px] px-[10px] py-[50px]">
-        <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
-          <span className="w-[3rem] h-[3rem] text-center p-[10px] text-white bg-primaryColor text-[20px] font-[700] rounded-full">
-            02
-          </span>
-          <h2 className="text-[18px] font-[600] my-[10px]">
-            Virtual Planning Hub
-          </h2>
-          <p className="text-textColor text-[16px] font-[500] text-center md:text-left">
-            Our Virtual planning hub is the central repository for all your
-            wedding details and tasks. It houses your checklist, timeline,
-            budget, guest list tracking, seating arrangements, contacts, and
-            additional notes, ensuring everything is conveniently organized in
-            one place.
-          </p>
-        </div>
-        <div className="w-full md:w-1/2 flex justify-center items-center">
-          <Image src="/images/virtual.png" width={300} height={200} alt="" />
-        </div>
-      </div>
-
-      <div className="flex flex-col-reverse md:flex-row justify-center gap-[20px] px-[10px] py-[50px] bg-grayBg">
-        <div className="w-full md:w-1/2 flex justify-center items-center">
-          <Image src="/images/photo.png" width={300} height={200} alt="" />
-        </div>
-        <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
-          <span className="w-[3rem] h-[3rem] text-center p-[10px] text-white bg-primaryColor text-[20px] font-[700] rounded-full">
-            03
-          </span>
-          <h2 className="text-[18px] font-[600] my-[10px]">Photography</h2>
-          <p className="text-textColor text-[16px] font-[500] text-center md:text-left">
-            We specialize in capturing the magic of your wedding day through the
-            lens of creativity and passion. Our team of experienced
-            photographers understands the significance of each moment, from the
-            heartfelt exchange of vows to the joyous celebration with your loved
-            ones.
-          </p>
+        <div className="hidden md:flex justify-center items-center">
+          <Image src="/images/about.png" width={320} height={320} alt="" />
         </div>
       </div>
     </div>
