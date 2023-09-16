@@ -5,7 +5,7 @@ export default function SignUp() {
   return (
     <Fragment>
       <Head>
-        <title>Sign with Email</title>
+        <title>Sign Up</title>
       </Head>
       <SignUpWithEmail />
     </Fragment>

@@ -1,52 +1,76 @@
 import { FcGoogle } from "react-icons/fc";
+import { AiOutlineMail } from "react-icons/ai";
 import Link from "next/link";
-import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import Image from "next/image";
 export default function SignUp() {
   return (
-    <div className="container">
-      {/* ======== Top Gradient ========== */}
-      <div className="flex flex-col items-center justify-center bgGradient w-full h-[10rem] md:h-[15rem]">
-        <h1 className="secondaryFont heading text-[35px] font-[700] text-white text-center">
-          SIGN UP TO DA WEDDING WHISPER
-        </h1>
-        <Link href="/">
-          <div className="flex items-center gap-[10px] cursor-pointer">
-            <BsFillArrowLeftCircleFill className="w-7 h-7 mx-auto mt-[10px]" />
-            <p className="text-[18px] font-[600] mt-[7px]">Home</p>
-          </div>
-        </Link>
-      </div>
-
+    <div className="container grid grid-cols-1 md:grid-cols-2">
       {/* ======== Sign up options =========== */}
-      <div className="flex flex-col items-center justify-center py-[50px] px-[10px]">
+      <div className="w-full flex flex-col px-[10px] md:px-[50px] py-[50px]">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-[2rem] sm:gap-[0px] sm:justify-between mb-[4rem]">
+          <div>
+            <Link href="/">
+              <button className="btn rounded-sm">Go to Home</button>
+            </Link>
+          </div>
+          <div className="flex flex-col">
+            <h2 className="text-[16px] font-[500] text-center">
+              Having Trouble?
+            </h2>
+            <Link
+              href="/"
+              className="text-[16px] font-[500] text-primaryColor text-center"
+            >
+              Get Help
+            </Link>
+          </div>
+        </div>
+
         <Link href="/">
-          <div className="w-[300px] bg-primaryColor flex justify-between items-center py-[10px] px-[20px] rounded-sm cursor-pointer">
+          <div className="max-w-[300px] w-[95%] bg-[#D9D9D9] flex gap-[2rem] items-center py-[10px] px-[20px] rounded-lg cursor-pointer mx-auto">
             <FcGoogle className="w-[2rem] h-[2rem]" />
-            <h3 className="text-[16px] font-[600]">SIGN UP WITH GOOGLE</h3>
+            <h3 className="text-[16px] font-[500] text-center">
+              Sign up with Google
+            </h3>
           </div>
         </Link>
 
-        <div className="flex items-center my-[30px]">
+        <div className="flex items-center my-[30px] mx-auto max-w-[300px] w-[95%]">
           <div className="w-[120px] h-[1px] bg-black"></div>
           <span className="text-[18px] font-[600] mx-[20px]">Or</span>
           <div className="w-[120px] h-[1px] bg-black"></div>
         </div>
 
         <Link href="/signup/signup">
-          <div className="w-[300px] bg-[#D9D9D9] text-primaryColor text-[16px] font-[500] flex justify-center items-center py-[10px] px-[20px] rounded-sm cursor-pointer">
-            Continue With E-mail
+          <div className="max-w-[300px] w-[95%] bg-primaryColor text-white text-[16px] font-[500] flex gap-[2rem] items-center py-[10px] px-[20px] rounded-lg cursor-pointer mx-auto">
+            <AiOutlineMail className="w-[2rem] h-[2rem]" />
+            <h3 className="text-[16px] font-[500] text-center">
+              Sign up with E-mail
+            </h3>
           </div>
         </Link>
 
-        <div className="w-full md:w-[40%] mt-[50px]">
-          <p className="text-[16px] text-[500] text-primaryColor text-center">
-            By creating an account you agree with our Terms of Service, Privacy
-            Policy, and our default Notification Settings.
-          </p>
-          <h1 className="text-[18px] font-[700] text-primaryColor text-center mt-[10px]">
-            Already have an account? <Link href="/login">Log In</Link>{" "}
+        <div className="w-full flex flex-col mt-[5rem]">
+          <h1 className="text-[16px] font-[500] text-black text-center">
+            Already have an account?
           </h1>
+          <Link
+            href="/login"
+            className="text-[16px] font-[500] text-primaryColor text-center"
+          >
+            Sign In
+          </Link>
         </div>
+      </div>
+
+      <div className="w-[100%] h-auto hidden md:block">
+        <Image
+          src="/images/signup.png"
+          width={500}
+          height={1500}
+          alt=""
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
     </div>
   );

@@ -1,114 +1,191 @@
+import { useState } from "react";
 import Link from "next/link";
-import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import Image from "next/image";
+import { BiShowAlt, BiHide } from "react-icons/bi";
 export default function SignUpWithEmail() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleShowPasswordConfirm = () => {
+    setShowPasswordConfirm(!showPasswordConfirm);
+  };
+
+  const getPasswordInputType = () => {
+    return showPassword ? "text" : "password";
+  };
+
+  const getPasswordConfirmInputType = () => {
+    return showPasswordConfirm ? "text" : "password";
+  };
+
   return (
-    <div className="container">
-      {/* ======== Top Gradient ========== */}
-      <div className="flex flex-col items-center justify-center bgGradient w-full h-[10rem] md:h-[15rem]">
-        <h1 className="secondaryFont heading text-[35px] font-[700] text-white text-center">
-          SIGN UP TO DA WEDDING WHISPER
-        </h1>
-        <Link href="/">
-          <div className="flex items-center gap-[10px] cursor-pointer">
-            <BsFillArrowLeftCircleFill className="w-7 h-7 mx-auto mt-[10px]" />
-            <p className="text-[18px] font-[600] mt-[7px]">Home</p>
-          </div>
-        </Link>
-      </div>
-
+    <div className="container grid grid-cols-1 md:grid-cols-2">
       {/*=============== Registration form ========== */}
-      <div className="py-[50px] flex flex-col justify-center items-center px-[10px]">
-        <form className="">
-          <div className="flex flex-col">
-            <label
-              htmlFor=""
-              className="text-[18px] font-[500] my-[5px] text-primaryColor"
-            >
-              First Name
-            </label>
-            <input
-              type="text"
-              placeholder="First Name"
-              required
-              className="p-[10px] rounded-sm border-none outline-none bg-[#EEEEEE] w-[300px]"
-            />
+      <div className="w-full flex flex-col justify-center px-[10px] md:px-[50px] py-[50px]">
+        <div className="">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-[2rem] sm:gap-[0px] sm:justify-between mb-[4rem]">
+            <div>
+              <Link href="/">
+                <button className="btn rounded-sm">Go to Home</button>
+              </Link>
+            </div>
+            <div className="flex flex-col">
+              <h2 className="text-[16px] font-[500] text-center">
+                Having Trouble?
+              </h2>
+              <Link
+                href="/"
+                className="text-[16px] font-[500] text-primaryColor text-center"
+              >
+                Get Help
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <label
-              htmlFor=""
-              className="text-[18px] font-[500] my-[5px] text-primaryColor"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              placeholder="Last Name"
-              required
-              className="p-[10px] rounded-sm border-none outline-none bg-[#EEEEEE] w-[300px]"
-            />
+          <h1 className="text-[25px] font-[700] text-primaryColor text-left">
+            Sign up
+          </h1>
+        </div>
+
+        <form className="">
+          <div className="flex justify-between sm:gap-[3rem] flex-col sm:flex-row">
+            <div className="flex flex-col w-full">
+              <label
+                htmlFor=""
+                className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
+              >
+                First Name <span className="text-black text-[16px]">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
+              />
+            </div>
+            <div className="flex flex-col w-full">
+              <label
+                htmlFor=""
+                className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
+              >
+                Last Name <span className="text-black text-[16px]">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
+              />
+            </div>
           </div>
 
           <div className="flex flex-col">
             <label
               htmlFor=""
-              className="text-[18px] font-[500] my-[5px] text-primaryColor"
+              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
             >
-              Email
+              Email <span className="text-black text-[16px]">*</span>
             </label>
             <input
               type="email"
-              placeholder="Email"
               required
-              className="p-[10px] rounded-sm border-none outline-none bg-[#EEEEEE] w-[300px]"
+              className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
           </div>
 
           <div className="flex flex-col">
             <label
               htmlFor=""
-              className="text-[18px] font-[500] my-[5px] text-primaryColor"
+              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
             >
-              Password
+              Phone Number <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type="password"
-              placeholder="Password"
+              type="numeric"
               required
-              className="p-[10px] rounded-sm border-none outline-none bg-[#EEEEEE] w-[300px]"
+              className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col relative">
             <label
               htmlFor=""
-              className="text-[18px] font-[500] my-[5px] text-primaryColor"
+              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
             >
-              Confirm Password
+              Create Password <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type="password"
-              placeholder="Confirm Password"
+              type={getPasswordInputType()}
               required
-              className="p-[10px] rounded-sm border-none outline-none bg-[#EEEEEE] w-[300px]"
+              className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
+            {showPassword ? (
+              <BiShowAlt
+                className="absolute right-0 top-[70%] text-[20px]"
+                onClick={handleShowPassword}
+              />
+            ) : (
+              <BiHide
+                className="absolute right-0 top-[70%] text-[20px]"
+                onClick={handleShowPassword}
+              />
+            )}
           </div>
 
-          <button className="btn w-[300px] rounded-sm mt-[30px]">
-            CREATE ACCOUNT
-          </button>
+          <div className="flex flex-col relative">
+            <label
+              htmlFor=""
+              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
+            >
+              Confirm Password <span className="text-black text-[16px]">*</span>
+            </label>
+            <input
+              type={getPasswordConfirmInputType()}
+              required
+              className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
+            />
+            {showPasswordConfirm ? (
+              <BiShowAlt
+                className="absolute right-0 top-[70%] text-[20px]"
+                onClick={handleShowPasswordConfirm}
+              />
+            ) : (
+              <BiHide
+                className="absolute right-0 top-[70%] text-[20px]"
+                onClick={handleShowPasswordConfirm}
+              />
+            )}
+          </div>
+
+          <div className="w-full flex flex-col sm:flex-row justify-center items-center sm:justify-between gap-[2rem] sm:gap-0 mt-[3rem]">
+            <div className="w-full flex flex-col">
+              <h1 className="text-[16px] font-[500] text-black text-center">
+                Already have an account?
+              </h1>
+              <Link
+                href="/login"
+                className="text-[16px] font-[500] text-primaryColor text-center"
+              >
+                Sign In
+              </Link>
+            </div>
+
+            <div className="w-full flex justify-center sm:justify-end">
+              <button className="btn rounded-md">Sign Up</button>
+            </div>
+          </div>
         </form>
+      </div>
 
-        <div className="w-full md:w-[40%] mt-[50px]">
-          <p className="text-[16px] text-[500] text-primaryColor text-center">
-            This site is protected by reCAPTCHA and the Google Privacy Policy
-            and Terms of Service apply.By creating an account you agree with our
-            Terms of Service, Privacy Policy, and our default Notification
-            Settings.
-          </p>
-          <h1 className="text-[18px] font-[700] text-primaryColor text-center mt-[10px]">
-            Already have an account? <Link href="/login">Log In</Link>{" "}
-          </h1>
-        </div>
+      <div className="w-[100%] h-auto hidden md:block">
+        <Image
+          src="/images/signup.png"
+          width={500}
+          height={1500}
+          alt=""
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
     </div>
   );

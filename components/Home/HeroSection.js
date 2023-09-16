@@ -11,12 +11,12 @@ export default function HeroSection() {
           </h2>
         </div>
 
-        <form className="flex bg-[#ED7B91] bg-opacity-60 rounded-[40px] w-fit mx-auto py-[25px] px-[20px] flex-col justify-center items-center gap-[30px] text-textColor text-[16px] font-[400] lg:flex-row">
+        <form className="flex bg-[#ED7B91] bg-opacity-60 rounded-[40px] w-[95%] mx-auto py-[25px] px-[20px] flex-col justify-center items-center gap-[30px] text-textColor text-[16px] font-[400] lg:w-fit lg:flex-row">
           <select
             name=""
             id=""
             required
-            className="py-[10px] px-[15px] w-[12rem] rounded-[15px] outline-none"
+            className="py-[10px] px-[15px] w-[95%] lg:w-[12rem] rounded-[15px] outline-none"
           >
             <option value="">Select City</option>
             <option value="">Islamabad</option>
@@ -28,21 +28,21 @@ export default function HeroSection() {
             type="date"
             placeholder="Select Date"
             required
-            className="py-[10px] px-[15px] w-[12rem] rounded-[15px] outline-none"
+            className="py-[10px] px-[15px] w-[95%] lg:w-[12rem] rounded-[15px] outline-none"
           />
 
           <select
             name=""
             id=""
             required
-            className="py-[10px] px-[15px] w-[12rem] rounded-[15px] outline-none"
+            className="py-[10px] px-[15px] w-[95%] lg:w-[12rem] rounded-[15px] outline-none"
           >
             <option value="">Select Time</option>
             <option value="">Lunch</option>
             <option value="">Dinner</option>
           </select>
 
-          <button className="btn bg-primaryColor rounded-[15px] shadow-lg w-[12rem] lg:w-fit">
+          <button className="btn bg-primaryColor rounded-[15px] shadow-lg w-[95%] lg:w-fit">
             Search
           </button>
         </form>
