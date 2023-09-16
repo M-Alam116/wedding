@@ -63,7 +63,7 @@ body {
   }
 
   .btn {
-    @apply bg-primaryColor py-[10px] px-[30px] text-white font-[500];
+    @apply bg-primaryColor py-[10px] px-[30px] text-white font-[500] shadow-xl drop-shadow-2xl;
   }
 
   .heading {

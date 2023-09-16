@@ -158,7 +158,7 @@ export default function SignUpWithEmail() {
             )}
           </div>
 
-          <div className="w-full flex flex-col sm:flex-row justify-center items-center sm:justify-between gap-[2rem] sm:gap-0 mt-[3rem]">
+          <div className="w-full flex flex-col-reverse sm:flex-row justify-center items-center sm:justify-between gap-[2rem] sm:gap-0 mt-[3rem]">
             <div className="w-full flex flex-col">
               <h1 className="text-[16px] font-[500] text-black text-center">
                 Already have an account?
