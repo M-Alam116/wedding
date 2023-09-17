@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en" style={{ scrollBehavior: "smooth" }}>
       <Head />
-      <link rel="icon" href="/images/logo.png" />
+      <link rel="icon" href="favicon.ico" />
       <body>
         <Main />
         <NextScript />

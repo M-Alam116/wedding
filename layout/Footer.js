@@ -12,12 +12,12 @@ export default function Footer() {
         {/* ============= main links ============ */}
         <div className="flex flex-col justify-center sm:flex-row sm:justify-evenly gap-[20px] sm:gap-[7rem]">
           <Link href="/">
-            <li className="text-[15px] font-[700] list-none text-center">
+            <li className="text-[15px] font-[700] list-none text-center hover:text-primaryColor">
               HOME
             </li>
           </Link>
           <Link href="/contact">
-            <li className="text-[15px] font-[700] list-none text-center">
+            <li className="text-[15px] font-[700] list-none text-center hover:text-primaryColor">
               CONTACT
             </li>
           </Link>
@@ -32,12 +32,12 @@ export default function Footer() {
 
         <div className="flex flex-col justify-center sm:flex-row sm:justify-evenly gap-[20px] sm:gap-[7rem]">
           <Link href="/about">
-            <li className="text-[15px] font-[700] list-none text-center">
+            <li className="text-[15px] font-[700] list-none text-center hover:text-primaryColor">
               ABOUT US
             </li>
           </Link>
           <Link href="/blog">
-            <li className="text-[15px] font-[700] list-none text-center">
+            <li className="text-[15px] font-[700] list-none text-center hover:text-primaryColor">
               BLOG
             </li>
           </Link>
