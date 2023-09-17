@@ -12,8 +12,8 @@ export default function Header() {
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
   return (
-    <header className="sticky top-0 shadow-md z-[999999]" ref={headerRef}>
-      <div className="container bg-white text-[18px] text-black font-[500] py-[5px] px-5">
+    <header className="container sticky top-0 shadow-md z-[999999]" ref={headerRef}>
+      <div className="bg-white text-[18px] text-black font-[500] py-[5px] px-5">
         <div className="flex justify-between items-center">
           {/* ========== logo ============ */}
           <div>

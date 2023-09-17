@@ -54,7 +54,12 @@ body {
 }
 
 .hamburger {
-  display: none
+  display: none;
+}
+
+/* swiper bullet color */
+.swiper-pagination-bullet {
+  background-color: rgba(230, 104, 128, 1) !important;
 }
 
 

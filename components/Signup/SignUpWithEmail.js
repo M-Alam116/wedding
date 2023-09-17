@@ -102,8 +102,9 @@ export default function SignUpWithEmail() {
               Phone Number <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type="numeric"
+              type="tel"
               required
+              pattern="[0-9]*"
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
           </div>

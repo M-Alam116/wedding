@@ -3,7 +3,7 @@ export default function TestimonialCard({ review }) {
   const { image, name, email, text } = review;
 
   return (
-    <div className="max-w-[300px] w-[95%] h-auto bg-secondaryBg flex flex-col justify-center items-center px-[20px] py-[30px] rounded-xl shadow-lg drop-shadow-lg">
+    <div className="max-w-[300px] w-[95%] h-auto bg-secondaryBg flex flex-col justify-center items-center px-[20px] mx-auto py-[30px] rounded-xl shadow-lg drop-shadow-lg">
       <div className="rounded-[100%] w-[100px] h-[100%] flex justify-center items-center">
         <Image
           src={image}

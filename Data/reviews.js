@@ -27,4 +27,25 @@ export const reviews = [
     email: "someone@gmail.com",
     text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et odio eligendi voluptatum nemo suscipit aliquam. ",
   },
+  {
+    id: 5,
+    image: "/images/test.jpg",
+    name: "Name 5",
+    email: "someone@gmail.com",
+    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et odio eligendi voluptatum nemo suscipit aliquam. ",
+  },
+  {
+    id: 6,
+    image: "/images/test.jpg",
+    name: "Name 6",
+    email: "someone@gmail.com",
+    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et odio eligendi voluptatum nemo suscipit aliquam. ",
+  },
+  {
+    id: 7,
+    image: "/images/test.jpg",
+    name: "Name 7",
+    email: "someone@gmail.com",
+    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et odio eligendi voluptatum nemo suscipit aliquam. ",
+  },
 ];

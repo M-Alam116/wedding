@@ -20,11 +20,7 @@ export default function Testimonials() {
             }}
             modules={[Pagination]}
             breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              768: {
+              700: {
                 slidesPerView: 2,
                 spaceBetween: 20,
               },
@@ -35,7 +31,7 @@ export default function Testimonials() {
             }}
           >
             {reviews.map((review) => (
-              <SwiperSlide key={review.id}>
+              <SwiperSlide key={review.id} className="mb-[3rem]">
                 <TestimonialCard review={review} />
               </SwiperSlide>
             ))}
