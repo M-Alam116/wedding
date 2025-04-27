@@ -1,10 +1,80 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BiShowAlt, BiHide } from "react-icons/bi";
+import { Snackbar, Alert } from "@mui/material";
+import useApi from "@/hooks/useApi";
+
 export default function SignUpWithEmail() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+  const { data, loading, error, fetchData } = useApi();
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("info");
+
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    username: "",
+    city: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    if (formValues.password !== formValues.confirmPassword) {
+      setSnackbarMessage("Passwords do not match!");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    fetchData({
+      method: "POST",
+      url: "/api/users/",
+      data: {
+        username: formValues.username,
+        email: formValues.email,
+        phone_number: formValues.phone,
+        city: formValues.city,
+        password: formValues.password,
+        first_name: formValues.firstName,
+        last_name: formValues.lastName,
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (loading) {
+      setSnackbarMessage("Signing up...");
+      setSnackbarSeverity("info");
+      setOpenSnackbar(true);
+    } else if (error) {
+      setSnackbarMessage(error.response?.data?.message || "Sign up failed!");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    } else if (data) {
+      setSnackbarMessage(data.message || "Sign up successful!");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
+      setFormValues({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        username: "",
+        city: "",
+        password: "",
+        confirmPassword: "",
+      });
+    }
+  }, [data, error, loading]);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -14,17 +84,17 @@ export default function SignUpWithEmail() {
     setShowPasswordConfirm(!showPasswordConfirm);
   };
 
-  const getPasswordInputType = () => {
-    return showPassword ? "text" : "password";
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const getPasswordConfirmInputType = () => {
-    return showPasswordConfirm ? "text" : "password";
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
     <div className="container grid grid-cols-1 md:grid-cols-2">
-      {/*=============== Registration form ========== */}
+      {/* Registration form */}
       <div className="w-full flex flex-col justify-center px-[10px] md:px-[50px] py-[50px]">
         <div className="">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-[2rem] sm:gap-[0px] sm:justify-between mb-[4rem]">
@@ -50,30 +120,31 @@ export default function SignUpWithEmail() {
           </h1>
         </div>
 
-        <form className="">
+        <form onSubmit={handleSignup}>
           <div className="flex justify-between sm:gap-[3rem] flex-col sm:flex-row">
             <div className="flex flex-col w-full">
-              <label
-                htmlFor=""
-                className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
-              >
+              <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
                 First Name <span className="text-black text-[16px]">*</span>
               </label>
               <input
                 type="text"
+                name="firstName"
+                value={formValues.firstName}
+                onChange={handleChange}
                 required
                 className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
               />
             </div>
+
             <div className="flex flex-col w-full">
-              <label
-                htmlFor=""
-                className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
-              >
+              <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
                 Last Name <span className="text-black text-[16px]">*</span>
               </label>
               <input
                 type="text"
+                name="lastName"
+                value={formValues.lastName}
+                onChange={handleChange}
                 required
                 className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
               />
@@ -81,43 +152,71 @@ export default function SignUpWithEmail() {
           </div>
 
           <div className="flex flex-col">
-            <label
-              htmlFor=""
-              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
-            >
-              Email <span className="text-black text-[16px]">*</span>
+            <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
+              Username <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type="email"
+              type="text"
+              name="username"
+              value={formValues.username}
+              onChange={handleChange}
               required
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
           </div>
 
           <div className="flex flex-col">
-            <label
-              htmlFor=""
-              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
-            >
+            <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
+              Email <span className="text-black text-[16px]">*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+              required
+              className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
               Phone Number <span className="text-black text-[16px]">*</span>
             </label>
             <input
               type="tel"
+              name="phone"
+              value={formValues.phone}
+              onChange={handleChange}
               required
               pattern="[0-9]*"
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
           </div>
 
+          <div className="flex flex-col">
+            <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
+              City <span className="text-black text-[16px]">*</span>
+            </label>
+            <input
+              type="text"
+              name="city"
+              value={formValues.city}
+              onChange={handleChange}
+              required
+              className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
+            />
+          </div>
+
           <div className="flex flex-col relative">
-            <label
-              htmlFor=""
-              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
-            >
+            <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
               Create Password <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type={getPasswordInputType()}
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
               required
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
@@ -135,14 +234,14 @@ export default function SignUpWithEmail() {
           </div>
 
           <div className="flex flex-col relative">
-            <label
-              htmlFor=""
-              className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
-            >
+            <label className="text-[16px] font-[400] text-black opacity-80 mt-[25px]">
               Confirm Password <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type={getPasswordConfirmInputType()}
+              type={showPasswordConfirm ? "text" : "password"}
+              name="confirmPassword"
+              value={formValues.confirmPassword}
+              onChange={handleChange}
               required
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
@@ -173,7 +272,9 @@ export default function SignUpWithEmail() {
             </div>
 
             <div className="w-full flex justify-center sm:justify-end">
-              <button className="btn rounded-md">Sign Up</button>
+              <button type="submit" className="btn rounded-md">
+                Sign Up
+              </button>
             </div>
           </div>
         </form>
@@ -184,10 +285,25 @@ export default function SignUpWithEmail() {
           src="/images/signup.png"
           width={500}
           height={1500}
-          alt=""
+          alt="signup image"
           style={{ width: "100%", height: "100%" }}
         />
       </div>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbarSeverity}
+          variant="filled"
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

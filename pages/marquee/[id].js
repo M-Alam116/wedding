@@ -358,7 +358,7 @@ export default function MarqueeDetailPage({ marquee }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const marqueeId = parseInt(params.id);
   const marquee = marqueeDetails.find((marquee) => marquee.id === marqueeId);
 
@@ -367,4 +367,12 @@ export async function getServerSideProps({ params }) {
       marquee,
     },
   };
+}
+
+export async function getStaticPaths() {
+  const paths = marqueeDetails.map((marquee) => ({
+    params: { id: marquee.id.toString() },
+  }));
+
+  return { paths, fallback: false };
 }

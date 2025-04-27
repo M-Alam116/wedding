@@ -2,8 +2,70 @@ import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import Link from "next/link";
+import useApi from "@/hooks/useApi";
+import { useState, useEffect } from "react";
+import { Alert, Snackbar } from "@mui/material";
 
 export default function Contact() {
+  const { data, loading, error, fetchData } = useApi();
+
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    phone_number: "",
+    message: "",
+  });
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("info");
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleContact = (e) => {
+    e.preventDefault();
+    fetchData({
+      method: "POST",
+      url: "/api/api/contact_us/",
+      data: formValues,
+    });
+  };
+
+  useEffect(() => {
+    if (loading) {
+      setSnackbarMessage("Sending your message...");
+      setSnackbarSeverity("info");
+      setOpenSnackbar(true);
+    } else if (error) {
+      setSnackbarMessage(
+        error.response?.data?.message || "Message sending failed!"
+      );
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    } else if (data) {
+      setSnackbarMessage("Message sent successfully!");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
+      setFormValues({
+        name: "",
+        email: "",
+        phone_number: "",
+        message: "",
+      });
+    }
+  }, [data, error, loading]);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
   return (
     <div className="container">
       <div className="bg-secondaryBg py-[2rem]">
@@ -78,31 +140,40 @@ export default function Contact() {
 
         {/* ======== form ============= */}
         <div className="flex justify-center items-center mx-auto border-none shadow-2xl rounded-[20px] max-w-[600px] w-[98%] order-1 lg:order-2">
-          <form className="w-full py-[1.5rem] px-[2rem]">
+          <form
+            className="w-full py-[1.5rem] px-[2rem]"
+            onSubmit={handleContact}
+          >
             <div className="flex justify-between sm:gap-[3rem] flex-col sm:flex-row">
               <div className="flex flex-col w-full">
                 <label
-                  htmlFor=""
+                  htmlFor="name"
                   className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
                 >
                   Your Name <span className="text-black text-[16px]">*</span>
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formValues.name}
                   required
+                  onChange={handleInputChange}
                   className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
                 />
               </div>
               <div className="flex flex-col w-full">
                 <label
-                  htmlFor=""
+                  htmlFor="email"
                   className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
                 >
                   Your Email <span className="text-black text-[16px]">*</span>
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formValues.email}
                   required
+                  onChange={handleInputChange}
                   className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
                 />
               </div>
@@ -110,37 +181,60 @@ export default function Contact() {
 
             <div className="flex flex-col w-full">
               <label
-                htmlFor=""
+                htmlFor="phone_number"
                 className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
               >
-                Subject <span className="text-black text-[16px]">*</span>
+                Phone Number <span className="text-black text-[16px]">*</span>
               </label>
               <input
-                type="text"
+                type="tel"
+                name="phone_number"
+                value={formValues.phone_number}
                 required
+                onChange={handleInputChange}
                 className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
               />
             </div>
 
             <div className="flex flex-col w-full">
               <label
-                htmlFor=""
+                htmlFor="message"
                 className="text-[16px] font-[400] text-black opacity-80 my-[25px]"
               >
                 Message <span className="text-black text-[16px]">*</span>
               </label>
               <textarea
+                name="message"
+                value={formValues.message}
+                onChange={handleInputChange}
                 rows={7}
                 required
                 className="p-[5px] rounded-sm border-[1.5px] border-black focus:border-primaryColor opacity-80 outline-none w-full"
               />
             </div>
             <div className="w-full flex justify-center sm:justify-start mt-[2rem]">
-              <button className="btn rounded-md">SEND MASSAGE</button>
+              <button className="btn rounded-md" type="submit">
+                SEND MESSAGE
+              </button>
             </div>
           </form>
         </div>
       </div>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbarSeverity}
+          variant="filled"
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

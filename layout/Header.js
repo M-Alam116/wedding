@@ -1,18 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { Avatar } from "@mui/material";
+
 export default function Header() {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const router = useRouter();
 
+  const accessToken = Cookies.get("accessToken");
+  const [initials, setInitials] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userData = localStorage.getItem("userData");
+      const user = userData ? JSON.parse(userData) : null;
+      const firstName = user?.first_name || "";
+      const lastName = user?.last_name || "";
+      setInitials(`${firstName[0] || ""}${lastName[0] || ""}`.toUpperCase());
+    }
+  }, []);
+
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
+  const handleLogout = () => {
+    Cookies.remove("accessToken");
+    localStorage.removeItem("userData");
+    router.push("/login");
+  };
+
   return (
-    <header className="container sticky top-0 shadow-md z-[999999]" ref={headerRef}>
+    <header
+      className="container sticky top-0 shadow-md z-[999999]"
+      ref={headerRef}
+    >
       <div className="bg-white text-[18px] text-black font-[500] py-[5px] px-5">
         <div className="flex justify-between items-center">
           {/* ========== logo ============ */}
@@ -56,18 +81,18 @@ export default function Header() {
                       : "hover:text-primaryColor"
                   }
                 >
-                  About US
+                  About Us
                 </li>
               </Link>
-              <Link href="/blog">
+              <Link href="/marquee">
                 <li
                   className={
-                    router.pathname === "/blog"
+                    router.pathname === "/marquee"
                       ? "active"
                       : "hover:text-primaryColor"
                   }
                 >
-                  Blog
+                  Marquee
                 </li>
               </Link>
               <Link href="/contact">
@@ -86,17 +111,33 @@ export default function Header() {
 
           {/* =========== right header =========== */}
           <div className="flex items-center gap-[10px] sm:gap-[30px]">
-            <Link href="/login">
-              <button className="btn bg-transparent text-black border-[2px] font-[500] text-[15px] py-[8px] border-primaryColor rounded-[6px]">
-                Log In
-              </button>
-            </Link>
+            {accessToken ? (
+              <div className="flex items-center gap-4">
+                <Avatar style={{ backgroundColor: "gray", color: "white" }}>
+                  {initials}
+                </Avatar>
+                <button
+                  onClick={handleLogout}
+                  className="btn bg-transparent text-black border-[2px] font-[500] text-[15px] py-[6px] px-[10px] border-primaryColor rounded-[6px]"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link href="/login">
+                  <button className="btn bg-transparent text-black border-[2px] font-[500] text-[15px] py-[8px] border-primaryColor rounded-[6px]">
+                    Log In
+                  </button>
+                </Link>
 
-            <Link href="/signup">
-              <button className="btn font-[500] text-[15px] rounded-[6px] hidden sm:inline">
-                Register
-              </button>
-            </Link>
+                <Link href="/signup">
+                  <button className="btn font-[500] text-[15px] rounded-[6px] hidden sm:inline">
+                    Register
+                  </button>
+                </Link>
+              </>
+            )}
 
             <span className="hamburger" onClick={toggleMenu}>
               <BiMenu className="w-8 h-8 cursor-pointer" />

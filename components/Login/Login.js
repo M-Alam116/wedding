@@ -1,9 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BiShowAlt, BiHide } from "react-icons/bi";
+import useApi from "@/hooks/useApi";
+import { Snackbar, Alert } from "@mui/material";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const { data, loading, error, fetchData } = useApi();
+
+  const { data: userData, fetchData: fetchUserData } = useApi();
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("info");
+
+  const router = useRouter();
+
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -12,6 +31,58 @@ export default function Login() {
   const getPasswordInputType = () => {
     return showPassword ? "text" : "password";
   };
+
+  const handleSignin = (e) => {
+    e.preventDefault();
+    fetchData({
+      method: "POST",
+      url: "/auth/token/login/",
+      data: {
+        email: formValues.email,
+        password: formValues.password,
+      },
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if (loading) {
+      setSnackbarMessage("Signing in...");
+      setSnackbarSeverity("info");
+      setOpenSnackbar(true);
+    } else if (error) {
+      setSnackbarMessage(error.response?.data?.message || "Sign in failed!");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    } else if (data) {
+      setSnackbarMessage(data.message || "Sign in successful!");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
+      setFormValues({
+        email: "",
+        password: "",
+      });
+      Cookies.set("accessToken", data.auth_token, { expires: 7 }); // expires in 7 days
+      fetchUserData({
+        method: "GET",
+        url: "/api/users/me",
+      });
+    }
+  }, [data, error, loading]);
+
+  useEffect(() => {
+    if (userData) {
+      localStorage.setItem("userData", JSON.stringify(userData));
+      router.push("/");
+    }
+  }, [userData]);
 
   return (
     <div className="container grid grid-cols-1 md:grid-cols-2">
@@ -41,16 +112,19 @@ export default function Login() {
           </h1>
         </div>
 
-        <form className="">
+        <form onSubmit={handleSignin}>
           <div className="flex flex-col">
             <label
-              htmlFor=""
+              htmlFor="email"
               className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
             >
-              Email <span className="text-black text-[16px]">*</span>
+              Username <span className="text-black text-[16px]">*</span>
             </label>
             <input
-              type="email"
+              type="text"
+              name="email"
+              value={formValues.email}
+              onChange={handleInputChange}
               required
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
@@ -58,13 +132,16 @@ export default function Login() {
 
           <div className="flex flex-col relative">
             <label
-              htmlFor=""
+              htmlFor="password"
               className="text-[16px] font-[400] text-black opacity-80 mt-[25px]"
             >
               Password <span className="text-black text-[16px]">*</span>
             </label>
             <input
               type={getPasswordInputType()}
+              name="password"
+              value={formValues.password}
+              onChange={handleInputChange}
               required
               className="p-[5px] rounded-sm border-b-[1.5px] border-b-black focus:border-b-primaryColor opacity-80 outline-none w-full"
             />
@@ -95,7 +172,9 @@ export default function Login() {
             </div>
 
             <div className="w-full flex justify-center sm:justify-end">
-              <button className="btn rounded-md">Log in</button>
+              <button type="submit" className="btn rounded-md">
+                Log in
+              </button>
             </div>
           </div>
         </form>
@@ -106,10 +185,25 @@ export default function Login() {
           src="/images/signup.png"
           width={500}
           height={1500}
-          alt=""
+          alt="Signup Image"
           style={{ width: "100%", height: "100%" }}
         />
       </div>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity={snackbarSeverity}
+          variant="filled"
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

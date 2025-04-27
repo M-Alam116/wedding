@@ -26,14 +26,12 @@ export default function SignUp() {
           </div>
         </div>
 
-        <Link href="/">
-          <div className="max-w-[300px] w-[95%] bg-[#D9D9D9] flex gap-[2rem] items-center py-[10px] px-[20px] rounded-lg cursor-pointer mx-auto">
-            <FcGoogle className="w-[2rem] h-[2rem]" />
-            <h3 className="text-[16px] font-[500] text-center">
-              Sign up with Google
-            </h3>
-          </div>
-        </Link>
+        <div className="max-w-[300px] w-[95%] bg-[#D9D9D9] flex gap-[2rem] items-center py-[10px] px-[20px] rounded-lg cursor-pointer mx-auto">
+          <FcGoogle className="w-[2rem] h-[2rem]" />
+          <h3 className="text-[16px] font-[500] text-center">
+            Sign up with Google
+          </h3>
+        </div>
 
         <div className="flex items-center my-[30px] mx-auto max-w-[300px] w-[95%]">
           <div className="w-[120px] h-[1px] bg-black"></div>
