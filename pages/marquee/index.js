@@ -2,9 +2,43 @@ import Card from "../../components/Marquee/Card";
 import Filter from "../../components/Marquee/Filter";
 import { marqueeDetails } from "../../Data/marqueeDetails";
 import { AiTwotoneFilter } from "react-icons/ai";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Head from "next/head";
+import useApi from "@/hooks/useApi";
+import { CircularProgress } from "@mui/material";
 export default function MarqueePage() {
+  const { data, fetchData, loading, error } = useApi();
+
+  const getAllMarquee = () => {
+    fetchData({
+      method: "GET",
+      url: "/api/marquees/",
+    });
+  };
+
+  useEffect(() => {
+    getAllMarquee();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container mx-auto py-10 px-4 flex justify-center items-center min-h-[50vh]">
+        <CircularProgress size={40} thickness={3} />
+      </div>
+    );
+  }  
+
+  if (error) {
+    return (
+      <div className="container mx-auto py-10 px-4 text-center text-red-500">
+        {error.response?.data?.message || "Failed to fetch data."}
+      </div>
+    );
+  }
+
+  console.log("data", data);
+  
+
   return (
     <Fragment>
       <Head>
@@ -27,14 +61,11 @@ export default function MarqueePage() {
           <div className="w-full lg:w-[25%]">
             <Filter />
           </div>
-          <div className="w-full lg:w-[72%]">
-            {marqueeDetails.map((marqueeData) => (
-              <Card key={marqueeData.id} marqueeData={marqueeData} />
+          <div className="w-full lg:w-[72%] flex justify-center flex-wrap gap-4">
+            {data?.map((marqueeData, index) => (
+              <Card key={index} marqueeData={marqueeData} />
             ))}
           </div>
-        </div>
-        <div className="flex justify-center items-center md:mr-[2rem] mb-[2rem] md:justify-end md:items-end">
-          <button className="btn">VIEW MORE</button>
         </div>
       </div>
     </Fragment>
