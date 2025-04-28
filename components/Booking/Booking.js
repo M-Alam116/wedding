@@ -8,7 +8,7 @@ import { Alert, Snackbar } from "@mui/material";
 
 export default function Booking() {
   const router = useRouter();
-  const { marqueeId, menuId, total_price } = router.query;
+  const { marqueeId, menuId, hallId, total_price } = router.query;
 
   const accessToken = Cookies.get("accessToken");
   const [user, setUser] = useState(null);
@@ -50,7 +50,7 @@ export default function Booking() {
     const payload = {
       user: user.id,
       marquee: Number(marqueeId),
-      // hall: Number(marqueeId),
+      hall: Number(hallId),
       menu: Number(menuId),
       total_price: total_price,
       date: bookingDate,
@@ -77,6 +77,8 @@ export default function Booking() {
       setSnackbarMessage(data.message || "Booking successful!");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
+      setBookingDate("");
+      setBookingTime("");
     }
   }, [data, error, loading, router]);
 

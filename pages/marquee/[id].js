@@ -7,13 +7,12 @@ import {
 } from "react-icons/pi";
 import { ImPriceTags } from "react-icons/im";
 import Image from "next/image";
-import Link from "next/link";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import useApi from "@/hooks/useApi";
 import { useRouter } from "next/router";
-import { CircularProgress } from "@mui/material";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
 import { MdFastfood, MdOutlineEventAvailable } from "react-icons/md";
 import { BsArrowRightCircleFill, BsFillCheckCircleFill } from "react-icons/bs";
 
@@ -22,27 +21,39 @@ const BACKEND_BASE_URL = "https://daww.azurewebsites.net";
 export default function MarqueeDetailPage() {
   const { data, fetchData, loading, error } = useApi();
   const { data: menuData, fetchData: fetchMenuData } = useApi();
+  const { data: hallsData, fetchData: fetchHallsData } = useApi();
   const router = useRouter();
   const { id } = router.query;
 
   const [selectedMenuId, setSelectedMenuId] = useState(null);
+  const [selectedHallId, setSelectedHallId] = useState(null);
+
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   const handleMenuSelect = (menuId) => {
     setSelectedMenuId(menuId);
   };
 
+  const handleHallSelect = (hallId) => {
+    setSelectedHallId(hallId);
+  };
+
   const selectedMenu = menuData?.find((menu) => menu.id === selectedMenuId);
 
   const handleBooking = () => {
-    if (!selectedMenuId) {
-      alert("Please select a menu before booking!");
+    if (!selectedMenuId || !selectedHallId) {
+      setToastMessage("Please select both a Menu and a Hall before booking!");
+      setToastOpen(true);
       return;
     }
+
     router.push({
       pathname: "/booking",
       query: {
         marqueeId: id,
         menuId: selectedMenuId,
+        hallId: selectedHallId,
         total_price: selectedMenu.price,
       },
     });
@@ -53,6 +64,15 @@ export default function MarqueeDetailPage() {
       fetchMenuData({
         method: "GET",
         url: `/api/api/marquees/${id}/menus/`,
+      });
+    }
+  };
+
+  const getHalls = () => {
+    if (id) {
+      fetchHallsData({
+        method: "GET",
+        url: `/api/api/marquees/${id}/halls/`,
       });
     }
   };
@@ -70,6 +90,7 @@ export default function MarqueeDetailPage() {
     if (id) {
       getSingleMarquee();
       getMenus();
+      getHalls();
     }
   }, [id]);
 
@@ -105,8 +126,6 @@ export default function MarqueeDetailPage() {
   const renderCatering = () => {
     return data?.catering === "IN" ? "Internal Catering" : "External Catering";
   };
-
-  console.log(menuData);
 
   return (
     <Fragment>
@@ -193,14 +212,16 @@ export default function MarqueeDetailPage() {
           </div>
 
           <div>
-            {menuData && menuData.length > 0 && (
+            {menuData && menuData.length < 0 ? (
+              <p className="mt-6">Menu not available</p>
+            ) : (
               <div className="mt-10">
                 <h2 className="text-textColor font-[700] text-[24px] mb-4">
                   Menus
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {menuData.map((menu) => (
+                  {menuData?.map((menu) => (
                     <div
                       key={menu.id}
                       className={`border p-6 rounded-lg shadow-md bg-white cursor-pointer
@@ -240,6 +261,53 @@ export default function MarqueeDetailPage() {
             )}
           </div>
 
+          <div>
+            {/* Halls Section */}
+            {hallsData && hallsData.length < 0 ? (
+              <p className="mt-6">Halls not available</p>
+            ) : (
+              <div className="mt-10">
+                <h2 className="text-textColor font-[700] text-[24px] mb-4">
+                  Halls
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {hallsData?.map((hall) => (
+                    <div
+                      key={hall.id}
+                      className={`border p-6 rounded-lg shadow-md bg-white cursor-pointer
+          ${
+            selectedHallId === hall.id
+              ? "border-pink-500 ring-2 ring-pink-400"
+              : ""
+          }
+        `}
+                      onClick={() => handleHallSelect(hall.id)}
+                    >
+                      <h3 className="text-lg font-bold mb-2">{hall.name}</h3>
+                      <p className="text-gray-700 mb-1">
+                        <span className="font-semibold">Capacity:</span>{" "}
+                        {hall.min_capacity} - {hall.max_capacity} Guests
+                      </p>
+                      <p className="text-gray-700 mb-1">
+                        <span className="font-semibold">Min Guest:</span> PKR{" "}
+                        {hall.min_guest?.toLocaleString()}
+                      </p>
+                      <p className="text-gray-700 mb-1">
+                        <span className="font-semibold">AC Charges:</span> PKR{" "}
+                        {hall.ac_charges?.toLocaleString()}
+                      </p>
+                      <p className="text-gray-700 mb-1">
+                        <span className="font-semibold">Heating Charges:</span>{" "}
+                        PKR {hall.heating_charges?.toLocaleString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           <h2 className="text-textColor font-[700] text-[24px] mb-4 mt-6">
             Images
           </h2>
@@ -262,6 +330,21 @@ export default function MarqueeDetailPage() {
             </button>
           </div>
         </div>
+
+        <Snackbar
+          open={toastOpen}
+          autoHideDuration={3000}
+          onClose={() => setToastOpen(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setToastOpen(false)}
+            severity="warning"
+            sx={{ width: "100%" }}
+          >
+            {toastMessage}
+          </Alert>
+        </Snackbar>
       </div>
     </Fragment>
   );
