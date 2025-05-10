@@ -10,7 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { RiArrowDownSLine } from "react-icons/ri";
 export default function Filter() {
   return (
-    <div className="flex flex-col gap-[20px]">
+    <div className="w-full flex flex-col gap-[20px]">
       {/* ========= range ======== */}
       <div className="flex justify-between items-center">
         <label htmlFor="range" className="text-[16px] font-[500]">
@@ -21,7 +21,7 @@ export default function Filter() {
 
       {/* =========== Budget ============ */}
       <div className="">
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<RiArrowDownSLine className="w-5 h-5" />}
             aria-controls="Budget"
@@ -60,7 +60,7 @@ export default function Filter() {
 
       {/* ============= type ========== */}
       <div className="">
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<RiArrowDownSLine className="w-5 h-5" />}
             aria-controls="Type"
@@ -84,7 +84,7 @@ export default function Filter() {
 
       {/* ================== capacity ================ */}
       <div className="">
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<RiArrowDownSLine className="w-5 h-5" />}
             aria-controls="Capacity"
@@ -107,7 +107,7 @@ export default function Filter() {
 
       {/* ====================== staff =============== */}
       <div className="">
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<RiArrowDownSLine className="w-5 h-5" />}
             aria-controls="Staff"
@@ -127,7 +127,7 @@ export default function Filter() {
 
       {/* ================= cancellation =============== */}
       <div className="">
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<RiArrowDownSLine className="w-5 h-5" />}
             aria-controls="Cancellation"

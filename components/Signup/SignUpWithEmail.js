@@ -4,12 +4,24 @@ import Image from "next/image";
 import { BiShowAlt, BiHide } from "react-icons/bi";
 import { Snackbar, Alert } from "@mui/material";
 import useApi from "@/hooks/useApi";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function SignUpWithEmail() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
+  const router = useRouter();
+
   const { data, loading, error, fetchData } = useApi();
+  const {
+    data: loginData,
+    error: loginError,
+    loading: loginLoading,
+    fetchData: fetchLogin,
+  } = useApi();
+
+  const { data: userData, fetchData: fetchUserData } = useApi();
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -63,6 +75,16 @@ export default function SignUpWithEmail() {
       setSnackbarMessage(data.message || "Sign up successful!");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
+
+      fetchLogin({
+        method: "POST",
+        url: "/auth/token/login/",
+        data: {
+          email: formValues.username,
+          password: formValues.password,
+        },
+      });
+
       setFormValues({
         firstName: "",
         lastName: "",
@@ -75,6 +97,37 @@ export default function SignUpWithEmail() {
       });
     }
   }, [data, error, loading]);
+
+  useEffect(() => {
+    if (loginLoading) {
+      setSnackbarMessage("Signing in...");
+      setSnackbarSeverity("info");
+      setOpenSnackbar(true);
+    } else if (loginError) {
+      setSnackbarMessage(
+        loginError.response?.data?.message || "Sign in failed!"
+      );
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    } else if (loginData) {
+      setSnackbarMessage(loginData.message || "Sign in successful!");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
+
+      Cookies.set("accessToken", loginData.auth_token, { expires: 7 }); // expires in 7 days
+      fetchUserData({
+        method: "GET",
+        url: "/api/users/me",
+      });
+    }
+  }, [loginData, loginError, loginLoading]);
+
+  useEffect(() => {
+    if (userData) {
+      localStorage.setItem("userData", JSON.stringify(userData));
+      router.push("/");
+    }
+  }, [userData]);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -108,7 +161,7 @@ export default function SignUpWithEmail() {
                 Having Trouble?
               </h2>
               <Link
-                href="/"
+                href="/contact"
                 className="text-[16px] font-[500] text-primaryColor text-center"
               >
                 Get Help

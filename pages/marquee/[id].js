@@ -133,14 +133,39 @@ export default function MarqueeDetailPage() {
         <title>{data?.name}</title>
       </Head>
 
-      <div className="container">
-        <div className="flex items-center justify-center bgGradient w-full h-[15rem] md:h-[20rem]">
+      <div className="container p-4">
+        {/* <div className="flex items-center justify-center bgGradient w-full h-[15rem] md:h-[20rem]">
           <h1 className="secondaryFont heading text-[40px] font-[700] text-white text-center">
             {data?.name}
           </h1>
+        </div> */}
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          {data?.photos?.map((photo, index) => (
+            <div
+              key={index}
+              className={
+                index === 0
+                  ? "md:col-span-2 row-span-2 h-[250px] md:h-[508px]"
+                  : "h-[250px]"
+              }
+            >
+              <Image
+                src={`${BACKEND_BASE_URL}${photo.image}`}
+                alt={`Marquee Image ${index + 1}`}
+                width={500}
+                height={300}
+                className="w-full h-full object-cover rounded-md"
+              />
+            </div>
+          ))}
         </div>
 
-        <div className="px-[10px] md:mx-[20px] py-[50px] text-textColor">
+        <h1 className="secondaryFont heading text-3xl font-[700] text-center mt-8 mb-4">
+          {data?.name}
+        </h1>
+
+        <div className="text-textColor">
           <div className="flex flex-col gap-2">
             <h1 className="text-textColor font-[700] text-[22px]">
               DESCRIPTION
@@ -306,22 +331,6 @@ export default function MarqueeDetailPage() {
                 </div>
               </div>
             )}
-          </div>
-
-          <h2 className="text-textColor font-[700] text-[24px] mb-4 mt-6">
-            Images
-          </h2>
-          <div className="flex flex-wrap gap-4">
-            {data?.photos?.map((photo, index) => (
-              <Image
-                key={index}
-                src={`${BACKEND_BASE_URL}${photo.image}`}
-                alt={`Marquee Image ${index + 1}`}
-                width={500}
-                height={300}
-                className="object-cover rounded-md"
-              />
-            ))}
           </div>
 
           <div className="flex justify-center mt-8">

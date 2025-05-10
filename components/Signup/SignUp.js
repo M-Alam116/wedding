@@ -18,7 +18,7 @@ export default function SignUp() {
               Having Trouble?
             </h2>
             <Link
-              href="/"
+              href="/contact"
               className="text-[16px] font-[500] text-primaryColor text-center"
             >
               Get Help

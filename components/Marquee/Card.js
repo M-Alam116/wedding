@@ -19,18 +19,17 @@ export default function Card({ marqueeData }) {
 
   const BACKEND_BASE_URL = "https://daww.azurewebsites.net";
   const firstImage =
-    photos?.length > 0 ? `${BACKEND_BASE_URL}${photos[0].image}` : null;    
+    photos?.length > 0 ? `${BACKEND_BASE_URL}${photos[0].image}` : null;
 
   return (
-    <div className="w-full max-w-sm h-fit bg-white shadow-lg rounded-lg overflow-hidden mt-6 flex flex-col">
-      <div className="relative w-full h-[200px] bg-gray-100">
+    <div className="w-full bg-white shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-3">
+      <div className="relative w-full h-72 md:h-full bg-gray-100 col-span-1 overflow-hidden">
         {firstImage ? (
           <Image
             src={firstImage}
             alt={name}
-            layout="fill"
-            objectFit="cover"
-            className="hover:scale-105 transition-all duration-300"
+            fill
+            className="object-cover w-full h-full hover:scale-105 transition-all duration-300"
           />
         ) : (
           <div className="flex justify-center items-center w-full h-full text-gray-500">
@@ -39,7 +38,7 @@ export default function Card({ marqueeData }) {
         )}
       </div>
 
-      <div className="flex flex-col p-5 gap-4">
+      <div className="flex flex-col p-5 gap-4 col-span-2">
         <div>
           <h2 className="text-xl font-bold text-primaryColor">{name}</h2>
           <div className="flex items-center gap-2 text-gray-600 mt-1">
@@ -75,7 +74,7 @@ export default function Card({ marqueeData }) {
 
         <div className="mt-4">
           <Link href={`/marquee/${id}`}>
-            <button className="w-full bg-primaryColor text-white px-4 py-2 rounded-md hover:bg-primaryColor-dark transition duration-300">
+            <button className="btn">
               View Details
             </button>
           </Link>
